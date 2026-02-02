@@ -5,6 +5,7 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.airbnb.interactions.CambiarAPestanaNueva;
+import org.airbnb.interactions.CerrarVentanaModal;
 import org.airbnb.utils.ExcelRedactorUtils;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
@@ -23,8 +24,7 @@ public class ExtraerInformacionTask implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(CambiarAPestanaNueva.cambiar());
-        actor.attemptsTo(WaitUntil.the(BTN_CERRAR_TRADUCCION, isVisible() ).forNoMoreThan(15).seconds());
-        actor.attemptsTo(Click.on(BTN_CERRAR_TRADUCCION));
+        actor.attemptsTo(CerrarVentanaModal.cerrar(BTN_CERRAR_TRADUCCION, 15));
         actor.attemptsTo(WaitUntil.the(TITULO_ALOJAMIENTO, isVisible() ).forNoMoreThan(15).seconds());
         actor.attemptsTo(WaitUntil.the(BTN_PRECIO, isClickable() ).forNoMoreThan(15).seconds());
         actor.attemptsTo(Click.on(BTN_PRECIO));
